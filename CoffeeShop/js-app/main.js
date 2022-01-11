@@ -1,4 +1,7 @@
-﻿const url = "https://localhost:44352/api/beanvariety/";
+﻿import {getAllBeanVarieties} from "./apiManager.js"
+import {CoffeeList} from "./Coffeelist.Js"
+
+    
 
 const button = document.querySelector("#run-button");
 button.addEventListener("click", () => {
@@ -8,6 +11,12 @@ button.addEventListener("click", () => {
         })
 });
 
-function getAllBeanVarieties() {
-    return fetch(url).then(resp => resp.json());
+const showCoffeeList = () => {
+	getAllBeanVarieties().then(allCoffee => {
+		const listElement = document.querySelector(".mainContainer")
+		listElement.innerHTML = CoffeeList(allCoffee);
+	})
 }
+
+showCoffeeList();
+
